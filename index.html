@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <meta charset="UTF-8" />
-		<script type="text/javascript" src="index.js"></script>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./style/index.css">
+		<script type="text/javascript" src="./js/eval.js"></script>
 		<title>AI-V/S-Human</title>
 	</head>
 	<body>
+		<input type="button" value="AI-First" id="bnt-restart" onclick="restartBnt(this)"/>
+		<br>
 		<table id="tic-tac-toe" >
-			<tr><td id="00" onclick="click(this)">0</td><td id="01" onclick="click(this)">1</td><td id="02" onclick="click(this)">2</td></tr>
-			<tr><td id="10" onclick="click(this)">3</td><td id="11" onclick="click(this)">4</td><td id="12" onclick="click(this)">5</td></tr>
-			<tr><td id="20" onclick="click(this)">6</td><td id="21" onclick="click(this)">7</td><td id="22" onclick="click(this)">8</td></tr>
+			<tr><td id="00" onclick="click(this)"></td><td id="01" onclick="click(this)"></td><td id="02" onclick="click(this)"></td></tr>
+			<tr><td id="10" onclick="click(this)"></td><td id="11" onclick="click(this)"></td><td id="12" onclick="click(this)"></td></tr>
+			<tr><td id="20" onclick="click(this)"></td><td id="21" onclick="click(this)"></td><td id="22" onclick="click(this)"></td></tr>
 		</table>
 		<br><br>
-		<input type="button" value="AI-First" id="bnt-restart" onclick="restartBnt(this)"/>
-		<br />
+	
 
 	</body>
 </html>
