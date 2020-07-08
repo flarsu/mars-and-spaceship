@@ -88,65 +88,15 @@ function evaluate()
 
 function minimax(board, depth, isMax, maxDepth)
 {
-    let score = evaluate(board);
-
-    if(score==10) 
-        return score;
+    if(depth==maxDepth || isGameOver(board))
+    {
+        if(evaluate(board) == Human)
+            return 10 - depth;
+        else if(evaluate(board)==-10)
+            return -10+depth;
         
-    if(score=-10)
-        return score;
-    
-    if(isGameOver(board))    
-        return 0;
-    if(isMax)
-    {
-        best = [-1,-1,-1000];
-        if(maxDepth==0)
-        {
-            return best;
-        }
-        for(let i=0;i<3;i++)
-        {
-            for(let j=0;j<3;j++)
-            {
-                if(board[i][j]=='_')
-                    {
-                        board[i][j] = Human;
-                        best[0] = i;
-                        best[1] = j;
-                        best[2] = max(best[2], minimax(best[2], depth+1, false, maxDepth-1));
-
-                        board[i][j] = '_';
-                    }
-            }
-        }
-        return best;
-
-    }    
-    else
-    {
-        best = 1000;
-        if(maxDepth ==0)
-        {
-            return best;
-        }
-        for(let i=0;i<3;i++)
-        {
-            for(let j=0;j<3;j++)
-            {
-                if(board[i][j]=='_')
-                    {
-                        board[i][j] = AI;
-
-                        best = min(best, minimax(best, depth+1, false, maxDepth-1));
-
-                        board[i][j] = '_';
-                    }
-            }
-        }
-        return best;
+        return 0;    
     }
-
 }
 
 function clicked(cell)
