@@ -8,7 +8,14 @@
 	</head>
 	<body>
 		<input type="button" value="AI-First" id="bnt-restart" onclick="restartBtn(this)"/>
-		<br>
+		
+	
+			<select id='level' >
+				<option value="difficult">Difficult</option>
+				<option value="easy">Easy</option>
+			</select>
+		  
+		  <br><br>
 		<table id="tic-tac-toe" >
 			<tr><td id="00" onclick="clicked(this)"></td><td id="01" onclick="clicked(this)"></td><td id="02" onclick="clicked(this)"></td></tr>
 			<tr><td id="10" onclick="clicked(this)"></td><td id="11" onclick="clicked(this)"></td><td id="12" onclick="clicked(this)"></td></tr>
@@ -16,6 +23,5 @@
 		</table>
 		<br><br>
 	
-
 	</body>
 </html>

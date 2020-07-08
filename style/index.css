@@ -46,4 +46,13 @@
 	border: none;
 	border-radius: 6px;
 	cursor: pointer;
+	float:left
+}
+
+
+#level{
+	background-color: transparent;
+	border: none;
+	float: left;
+		
 }

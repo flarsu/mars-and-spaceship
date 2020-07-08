@@ -7,7 +7,14 @@ var board = [
 var HUMAN = -1;
 var AI = +1;
 
+function maxDepth(board)
+{	let level = document.getElementById('level').value;
 
+	if(level == 'easy')
+	  return 3;
+	else if(level== 'difficult') 
+		return emptyCells(board).length; 
+}
 
 function emptyCells(state) {
 	var cells = [];
@@ -22,7 +29,7 @@ function emptyCells(state) {
 }
 
 function validMove(x, y) {
-	var empties = emptyCells(board);
+	// var empties = emptyCells(board);
 	try {
 		if (board[x][y] == 0) {
 			return true;
@@ -89,6 +96,10 @@ function Over(state, player) {
 function allOver(state) {
 	return Over(state, HUMAN) || Over(state, AI);
 }
+function shuffle(list){
+	list.sort(()=>Math.random()-0.5);
+	return list;
+}
 function bestMove(state, depth, player) {
 	var best;
 
@@ -99,12 +110,12 @@ function bestMove(state, depth, player) {
 		best = [-1, -1, +1000];
 	}
 
-	if (depth == 0 || allOver(state)) {
+	if (depth ==emptyCells(board).length-maxDepth(board) || allOver(state)) {
 		var score = evalute(state);
 		return [-1, -1, score];
 	}
 
-	emptyCells(state).forEach(function (cell) {
+	shuffle(emptyCells(state)).forEach(function (cell) {
 		var x = cell[0];
 		var y = cell[1];
 		state[x][y] = player;
@@ -143,7 +154,7 @@ function aiMove() {
 
 	if (setMove(x, y, AI)) {
 		cell = document.getElementById(String(x) + String(y));
-		cell.innerHTML = "O";
+		cell.innerHTML = "AI";
 	}
 }
 
@@ -157,7 +168,7 @@ function clicked(cell) {
 		var y = cell.id.split("")[1];
 		var move = setMove(x, y, HUMAN);
 		if (move == true) {
-			cell.innerHTML = "X";
+			cell.innerHTML = "HU";
 			if (conditionToContinue)
 				aiMove();
 		}
