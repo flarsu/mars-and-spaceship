@@ -209,7 +209,7 @@ function clicked(cell) {
 			cell = document.getElementById(String(lines[i][0]) + String(lines[i][1]));
 			cell.style.color = "red";
 		}
-        window.alert('You Lose')
+        window.alert('Computer Wins')
     }
 	if (emptyCells(board).length == 0 && !allOver(board)) {
 		window.alert('Draw')
