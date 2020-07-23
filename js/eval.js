@@ -100,7 +100,7 @@ function shuffle(list){
 	list.sort(()=>Math.random()-0.5);
 	return list;
 }
-function bestMove(state, depth, player) {
+function bestMove(state, depth, player, alpha, beta) {
 	var best;
 
 	if (player == AI) {
@@ -112,6 +112,11 @@ function bestMove(state, depth, player) {
 
 	if (depth ==emptyCells(board).length-maxDepth(board) || allOver(state)) {
 		var score = evalute(state);
+		if (score == 1)
+			return [-1,-1,score+depth]
+		else if(score == -1)
+			return [-1, -1, score-depth]
+
 		return [-1, -1, score];
 	}
 
@@ -119,7 +124,7 @@ function bestMove(state, depth, player) {
 		var x = cell[0];
 		var y = cell[1];
 		state[x][y] = player;
-		var score = bestMove(state, depth - 1, -player);
+		var score = bestMove(state, depth - 1, -player, alpha, beta);
 		state[x][y] = 0;
 		score[0] = x;
 		score[1] = y;
@@ -127,10 +132,16 @@ function bestMove(state, depth, player) {
 		if (player == AI) {
 			if (score[2] > best[2])
 				best = score;
+			alpha = Math.max(best[2], alpha )
+			if(beta<=alpha)
+				return best;
 		}
 		else {
 			if (score[2] < best[2])
 				best = score;
+			beta = Math.min(best[2],beta)
+			if(beta<=alpha)
+				return best;	
 		}
 	});
 
@@ -154,7 +165,7 @@ function aiMove() {
 
 	if (setMove(x, y, AI)) {
 		cell = document.getElementById(String(x) + String(y));
-		cell.innerHTML = "AI";
+		cell.innerHTML = "O";
 	}
 }
 
@@ -168,7 +179,7 @@ function clicked(cell) {
 		var y = cell.id.split("")[1];
 		var move = setMove(x, y, HUMAN);
 		if (move == true) {
-			cell.innerHTML = "HU";
+			cell.innerHTML = "X";
 			if (conditionToContinue)
 				aiMove();
 		}
@@ -176,7 +187,6 @@ function clicked(cell) {
 	if (Over(board, AI)) {
 		var lines;
 		var cell;
-		var msg;
 
 		if (board[0][0] == 1 && board[0][1] == 1 && board[0][2] == 1)
 			lines = [[0, 0], [0, 1], [0, 2]];
@@ -230,4 +240,131 @@ function restartBtn(button) {
 		button.value = "AI-First";
 		
 	}
+}
+let hints =3;
+function Hint(button){
+	hints = hints-1;
+	button.value= hints+"Hints";
+	if(hints==0)
+		button.disabled = true;
+
+	var x, y;
+	var move;
+
+	if (emptyCells(board).length == 9) {
+		x = parseInt(Math.random() * 3);
+		y = parseInt(Math.random() * 3);
+	}
+	else {
+		move = bestMove(board, emptyCells(board).length, HUMAN);
+		x = move[0];
+		y = move[1];
+	}
+	console.log(move);
+}	
+
+function MultiPlayer(cell){
+	let level = document.getElementById('level').value;
+	if(level == '2Player')
+	{
+		clickedMulti(cell);
+	}else(
+		clicked(cell)
+	)
+}
+let playerA = 1;
+let playerB = -1;
+let chanceA = true;
+let chanceB = false;
+
+function clickedMulti(cell){
+	var button = document.getElementById("bnt-restart");
+	button.disabled = true;
+	var conditionToContinue = allOver(board) == false && emptyCells(board).length > 0;
+
+	if (conditionToContinue == true) {
+		var x = cell.id.split("")[0];
+		var y = cell.id.split("")[1];
+		if(chanceA)
+		{
+			var move = setMove(x, y, playerA);
+			if (move == true) {
+				cell.innerHTML = "X";
+				if (conditionToContinue)
+					chanceB=true;
+					chanceA=false;
+			}
+		}else{
+			var move = setMove(x, y, playerB);
+			if (move == true) {
+				cell.innerHTML = "O";
+				if (conditionToContinue)
+					chanceB=false;
+					chanceA=true;
+			}
+		}
+		
+	}
+	if (Over(board, playerA)) {
+		var lines;
+		var cell;
+
+		if (board[0][0] == 1 && board[0][1] == 1 && board[0][2] == 1)
+			lines = [[0, 0], [0, 1], [0, 2]];
+		else if (board[1][0] == 1 && board[1][1] == 1 && board[1][2] == 1)
+			lines = [[1, 0], [1, 1], [1, 2]];
+		else if (board[2][0] == 1 && board[2][1] == 1 && board[2][2] == 1)
+			lines = [[2, 0], [2, 1], [2, 2]];
+		else if (board[0][0] == 1 && board[1][0] == 1 && board[2][0] == 1)
+			lines = [[0, 0], [1, 0], [2, 0]];
+		else if (board[0][1] == 1 && board[1][1] == 1 && board[2][1] == 1)
+			lines = [[0, 1], [1, 1], [2, 1]];
+		else if (board[0][2] == 1 && board[1][2] == 1 && board[2][2] == 1)
+			lines = [[0, 2], [1, 2], [2, 2]];
+		else if (board[0][0] == 1 && board[1][1] == 1 && board[2][2] == 1)
+			lines = [[0, 0], [1, 1], [2, 2]];
+		else if (board[2][0] == 1 && board[1][1] == 1 && board[0][2] == 1)
+			lines = [[2, 0], [1, 1], [0, 2]];
+
+		for (var i = 0; i < lines.length; i++) {
+			cell = document.getElementById(String(lines[i][0]) + String(lines[i][1]));
+			cell.style.color = "red";
+		}
+        window.alert('PlayerA Wins')
+	}
+	if(Over(board,playerB)){
+		var lines;
+		var cell;
+
+		if (board[0][0] == -1 && board[0][1] == -1 && board[0][2] == -1)
+			lines = [[0, 0], [0, 1], [0, 2]];
+		else if (board[1][0] == -1 && board[1][1] == -1 && board[1][2] == -1)
+			lines = [[1, 0], [1, 1], [1, 2]];
+		else if (board[2][0] == -1 && board[2][1] == -1 && board[2][2] == -1)
+			lines = [[2, 0], [2, 1], [2, 2]];
+		else if (board[0][0] == -1 && board[1][0] == -1 && board[2][0] == -1)
+			lines = [[0, 0], [1, 0], [2, 0]];
+		else if (board[0][1] == -1 && board[1][1] == -1 && board[2][1] == -1)
+			lines = [[0, 1], [1, 1], [2, 1]];
+		else if (board[0][2] == -1 && board[1][2] == -1 && board[2][2] == -1)
+			lines = [[0, 2], [1, 2], [2, 2]];
+		else if (board[0][0] == -1 && board[1][1] == -1 && board[2][2] == -1)
+			lines = [[0, 0], [1, 1], [2, 2]];
+		else if (board[2][0] == -1 && board[1][1] == -1 && board[0][2] == -1)
+			lines = [[2, 0], [1, 1], [0, 2]];
+
+		for (var i = 0; i < lines.length; i++) {
+			cell = document.getElementById(String(lines[i][0]) + String(lines[i][1]));
+			cell.style.color = "green";
+		}
+        window.alert('PlayerB Wins')
+	}
+	if (emptyCells(board).length == 0 && !allOver(board)) {
+		window.alert('Draw')
+	}
+	if (allOver(board) == true || emptyCells(board).length == 0) {
+		button.value = "Restart";
+		button.disabled = false;
+	}
+
 }
