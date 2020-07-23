@@ -1,3 +1,22 @@
+function initial()
+{
+	document.getElementById("bSide").innerHTML = '<img src="./robot.png" style="height:80%;position:absolute">';
+}
+function setWally(){
+	console.log('hi');
+	let level = document.getElementById("level").value;
+	if(level == 'easy' || level == 'difficult')
+		document.getElementById("bSide").innerHTML = '<img src="./robot.png" style="height:80%;position:absolute">';
+	else{
+		document.getElementById("bSide").innerHTML = '<img src="./playerB.svg" style="height:80%;position:absolute">';
+		var button = document.getElementById("hint");
+		button.style.display = 'none';
+		document.getElementById('name').innerHTML = "PlayerB";
+		document.getElementById('bnt-restart').style.display = 'none';
+	}	
+}
+
+
 var board = [
 	[0, 0, 0],
 	[0, 0, 0],
@@ -209,7 +228,7 @@ function clicked(cell) {
 			cell = document.getElementById(String(lines[i][0]) + String(lines[i][1]));
 			cell.style.color = "red";
 		}
-        window.alert('Computer Wins')
+        swal("Jade Wins", "Try Again", "error");
     }
 	if (emptyCells(board).length == 0 && !allOver(board)) {
 		window.alert('Draw')
@@ -224,10 +243,10 @@ function restartBtn(button) {
 	if (button.value == "AI-First") {
 		aiMove();
 		button.disabled = true;
+	
 	}
 	else if (button.value == "Restart") {
 		var htmlBoard;
-		var msg;
 
 		for (var x = 0; x < 3; x++) {
 			for (var y = 0; y < 3; y++) {
@@ -237,7 +256,7 @@ function restartBtn(button) {
 				htmlBoard.innerHTML = "";
 			}
 		}
-		button.value = "AI-First";
+		button.value = "Jade-First";
 		
 	}
 }
@@ -260,18 +279,23 @@ function Hint(button){
 		x = move[0];
 		y = move[1];
 	}
-	console.log(move);
+	document.getElementById(String(x)+String(y)).style.background = ' #259990 ';
+	setTimeout(() => {
+		document.getElementById(String(x)+String(y)).style.background = '#14bdac';
+	}, 3000);
 }	
 
 function MultiPlayer(cell){
 	let level = document.getElementById('level').value;
 	if(level == '2Player')
-	{
+	{	var button = document.getElementById("bnt-restart");
+		button.disabled = true;
 		clickedMulti(cell);
 	}else(
 		clicked(cell)
 	)
 }
+
 let playerA = 1;
 let playerB = -1;
 let chanceA = true;
@@ -328,9 +352,9 @@ function clickedMulti(cell){
 
 		for (var i = 0; i < lines.length; i++) {
 			cell = document.getElementById(String(lines[i][0]) + String(lines[i][1]));
-			cell.style.color = "red";
+			cell.style.color = "green";
 		}
-        window.alert('PlayerA Wins')
+        swal("PlayerA Wins", "", "success");
 	}
 	if(Over(board,playerB)){
 		var lines;
@@ -355,10 +379,10 @@ function clickedMulti(cell){
 
 		for (var i = 0; i < lines.length; i++) {
 			cell = document.getElementById(String(lines[i][0]) + String(lines[i][1]));
-			cell.style.color = "green";
+			cell.style.color = "red";
 		}
-        window.alert('PlayerB Wins')
-	}
+		swal("PlayerB Wins", "", "success");
+		}
 	if (emptyCells(board).length == 0 && !allOver(board)) {
 		window.alert('Draw')
 	}

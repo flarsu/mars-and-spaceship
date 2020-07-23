@@ -5,23 +5,47 @@
 		<link rel="stylesheet" href="./style/index.css">
 		<script type="text/javascript" src="./js/eval.js"></script>
 		<link rel="icon" href="image.jpg">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<title>Tic-Tac-Toe</title>
 	</head>
-	<body>
-		<input type="button" value='AI-First' id = "bnt-restart" onclick = "restartBtn(this)">
-		<input type="button" value = '3 Hint' id = "hint" onclick = "Hint(this)">
-		<select id='level' >
-			<option value="difficult">Difficult</option>
-			<option value="easy">Easy</option>
-			<option value="2Player">2Player</option>
-		</select>
-	  
-	  <br><br>
-	<table id="tic-tac-toe" >
-		<tr><td id="00" onclick="MultiPlayer(this)"></td><td id="01" onclick="MultiPlayer(this)"></td><td id="02" onclick="MultiPlayer(this)"></td></tr>
-		<tr><td id="10" onclick="MultiPlayer(this)"></td><td id="11" onclick="MultiPlayer(this)"></td><td id="12" onclick="MultiPlayer(this)"></td></tr>
-		<tr><td id="20" onclick="MultiPlayer(this)"></td><td id="21" onclick="MultiPlayer(this)"></td><td id="22" onclick="MultiPlayer(this)"></td></tr>
-	</table>
-	<br><br>
+	<body onload="initial()">
+		<div class="row" >
+			<div class="col-lg-3" style=" background:rgb(15, 71, 15)">
+				<h3 style="color:blanchedalmond;font-size: 5em;text-align: center;">PlayerA</h3>
+			</div>
+			<div class="col-lg-6">
+				<select id='level' class='select-css'>
+					<option value="difficult"onclick="setWally()" selected>Difficult</option>
+					<option value="easy"onclick="setWally()">Easy</option>
+					<option value="2Player" onclick="setWally()">2Player</option>
+				</select>
+				<input type="button" value = '3 Hints' id = "hint" onclick = "Hint(this)">
+				<input type="button" value='Jade-First' id = "bnt-restart" onclick = "restartBtn(this)">
+				
+			</div>
+			<div class="col-lg-3" style=" background:rgba(199, 5, 5, 0.808)">
+				<h1 style="color:blanchedalmond;font-size: 5em;text-align: center;" id="name">Jade</h1>
+			</div>
+			
+		</div>
+	  <div class="row" style="height:51em; background:url(./backg.png)">
+		  <div class="col-lg-3" style="background:rgba(7, 1, 1, 0.199)">
+			<img src="./playerA.jpg" alt="" id="aSide" style="height:80%;position:absolute">
+		</div>
+		  <div class="col-lg-6" style="padding-top: 5em;">
+			<table id="tic-tac-toe" >
+				<tr><td id="00" onclick="MultiPlayer(this)"></td><td id="01" onclick="MultiPlayer(this)"></td><td id="02" onclick="MultiPlayer(this)"></td></tr>
+				<tr><td id="10" onclick="MultiPlayer(this)"></td><td id="11" onclick="MultiPlayer(this)"></td><td id="12" onclick="MultiPlayer(this)"></td></tr>
+				<tr><td id="20" onclick="MultiPlayer(this)"></td><td id="21" onclick="MultiPlayer(this)"></td><td id="22" onclick="MultiPlayer(this)"></td></tr>
+			</table>
+		  </div>
+		  <div class="col-lg-3" id="bSide"style="background:rgba(7, 1, 1, 0.199)">
+			<!-- <img src="./robot.png"  id="bSide" alt="" style="height:80%;position:absolute"> -->
+		</div>
+	  </div>
 	</body>
 </html>
