@@ -384,7 +384,7 @@ function clickedMulti(cell){
 		swal("PlayerB Wins", "", "success");
 		}
 	if (emptyCells(board).length == 0 && !allOver(board)) {
-		window.alert('Draw')
+		swal("Draw", "","success")
 	}
 	if (allOver(board) == true || emptyCells(board).length == 0) {
 		button.value = "Restart";
