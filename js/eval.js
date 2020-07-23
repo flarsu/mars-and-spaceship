@@ -231,8 +231,8 @@ function clicked(cell) {
         swal("Jade Wins", "Try Again", "error");
     }
 	if (emptyCells(board).length == 0 && !allOver(board)) {
-		window.alert('Draw')
-	}
+		swal("Draw","","success");
+		}
 	if (allOver(board) == true || emptyCells(board).length == 0) {
 		button.value = "Restart";
 		button.disabled = false;
@@ -240,7 +240,7 @@ function clicked(cell) {
 }
 
 function restartBtn(button) {
-	if (button.value == "AI-First") {
+	if (button.value == "Jade-First") {
 		aiMove();
 		button.disabled = true;
 	
