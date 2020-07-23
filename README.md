@@ -6,10 +6,10 @@ A tic-tac-toe game developed using JS.<br>
   For optimizing the minimax algorithm  <i>Alpha Beta Pruning</i>  is applied in the algorithm. 
 
 ## Features:
-    * Game against Computer(Jade)
-    * Selecting cahnce to play
-    * Hints for best Move
-    * Multiplayer(Game against )
+    - Game against Computer(Jade)
+    - Selecting cahnce to play
+    - Hints for best Move
+    - Multiplayer(Game against )
   
 
 
