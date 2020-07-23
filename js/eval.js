@@ -6,13 +6,18 @@ function setWally(){
 	console.log('hi');
 	let level = document.getElementById("level").value;
 	if(level == 'easy' || level == 'difficult')
-		document.getElementById("bSide").innerHTML = '<img src="./robot.png" style="height:80%;position:absolute">';
+		{document.getElementById("bSide").innerHTML = '<img src="./robot.png" style="height:80%;position:absolute">';
+		var button = document.getElementById("hint");
+		button.style.display = 'block';
+		document.getElementById('name').innerHTML = "Jade";
+		document.getElementById('bnt-restart').style.display = 'block';	
+	}
 	else{
 		document.getElementById("bSide").innerHTML = '<img src="./playerB.svg" style="height:80%;position:absolute">';
 		var button = document.getElementById("hint");
 		button.style.display = 'none';
 		document.getElementById('name').innerHTML = "PlayerB";
-		document.getElementById('bnt-restart').style.display = 'none';
+		document.getElementById('bnt-restart').value = 'Restart';
 	}	
 }
 
@@ -256,7 +261,9 @@ function restartBtn(button) {
 				htmlBoard.innerHTML = "";
 			}
 		}
-		button.value = "Jade-First";
+		let level = document.getElementById("level").value;
+		if(level== 'easy'|| level=='difficult')
+				button.value = "Jade-First";
 		
 	}
 }
