@@ -191,7 +191,9 @@ function aiMove() {
 		cell = document.getElementById(String(x) + String(y));
 		cell.innerHTML = "O";
 	}
+	moves.push([x,y]);
 }
+let moves = [];
 
 function clicked(cell) {
 	var button = document.getElementById("bnt-restart");
@@ -203,11 +205,14 @@ function clicked(cell) {
 		var y = cell.id.split("")[1];
 		var move = setMove(x, y, HUMAN);
 		if (move == true) {
+			moves.push([x,y]);
 			cell.innerHTML = "X";
 			if (conditionToContinue)
 				aiMove();
+				
 		}
 	}
+	
 	if (Over(board, AI)) {
 		var lines;
 		var cell;
@@ -234,6 +239,33 @@ function clicked(cell) {
 			cell.style.color = "red";
 		}
         swal("Jade Wins", "Try Again", "error");
+	}
+	if (Over(board, HUMAN)) {
+		var lines;
+		var cell;
+
+		if (board[0][0] == -1 && board[0][1] == -1 && board[0][2] == -1)
+			lines = [[0, 0], [0, 1], [0, 2]];
+		else if (board[1][0] == -1 && board[1][1] == -1 && board[1][2] == -1)
+			lines = [[1, 0], [1, 1], [1, 2]];
+		else if (board[2][0] == -1 && board[2][1] == -1 && board[2][2] == -1)
+			lines = [[2, 0], [2, 1], [2, 2]];
+		else if (board[0][0] == -1 && board[1][0] == -1 && board[2][0] == -1)
+			lines = [[0, 0], [1, 0], [2, 0]];
+		else if (board[0][1] == -1 && board[1][1] == -1 && board[2][1] == -1)
+			lines = [[0, 1], [1, 1], [2, 1]];
+		else if (board[0][2] == -1 && board[1][2] == -1 && board[2][2] == -1)
+			lines = [[0, 2], [1, 2], [2, 2]];
+		else if (board[0][0] == -1 && board[1][1] == -1 && board[2][2] == -1)
+			lines = [[0, 0], [1, 1], [2, 2]];
+		else if (board[2][0] == -1 && board[1][1] == -1 && board[0][2] == -1)
+			lines = [[2, 0], [1, 1], [0, 2]];
+
+		for (var i = 0; i < lines.length; i++) {
+			cell = document.getElementById(String(lines[i][0]) + String(lines[i][1]));
+			cell.style.color = "green";
+		}
+        swal("You Win", "Well Done", "success");
     }
 	if (emptyCells(board).length == 0 && !allOver(board)) {
 		swal("Draw","","success");
@@ -264,7 +296,8 @@ function restartBtn(button) {
 		let level = document.getElementById("level").value;
 		if(level== 'easy'|| level=='difficult')
 				button.value = "Jade-First";
-		
+		while(moves.length>0)
+			moves.pop();
 	}
 }
 let hints =3;
@@ -273,6 +306,7 @@ function Hint(button){
 	button.value= hints+"Hints";
 	if(hints==0)
 		button.disabled = true;
+		button.title = "Hinst Finished"
 
 	var x, y;
 	var move;
@@ -397,5 +431,16 @@ function clickedMulti(cell){
 		button.value = "Restart";
 		button.disabled = false;
 	}
+
+}
+
+function undo(){
+	let last = moves.pop();
+	let second_last = moves.pop();
+
+	document.getElementById(String(last[0])+String(last[1])).innerHTML = " ";
+	board[last[0]][last[1]] = 0;
+	document.getElementById(String(second_last[0])+String(second_last[1])).innerHTML = " ";
+	board[second_last[0]][second_last[1]] = 0;
 
 }

@@ -10,6 +10,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<title>Tic-Tac-Toe</title>
 	</head>
 	<body onload="initial()">
@@ -23,7 +24,8 @@
 					<option value="easy"onclick="setWally()">Easy</option>
 					<option value="2Player" onclick="setWally()">2Player</option>
 				</select>
-				<input type="button" value = '3 Hints' id = "hint" onclick = "Hint(this)">
+				<input type="button" value = '3 Hints' id = "hint" onclick = "Hint(this)" data-toggle="tooltip" title="Hints">
+				<!-- <input type="button" value="<i class='fa fa-undo'></i>" id="undo" onclick="undo()"> -->
 				<input type="button" value='Jade-First' id = "bnt-restart" onclick = "restartBtn(this)">
 				
 			</div>
@@ -37,6 +39,8 @@
 			<img src="./playerA.jpg" alt="" id="aSide" style="height:80%;position:absolute">
 		</div>
 		  <div class="col-lg-6" style="padding-top: 5em;">
+			<button id="undo" onclick="undo()" data-toggle="tooltip" title="Undo"><i class="fa fa-undo fa-3x"></i></button>
+
 			<table id="tic-tac-toe" >
 				<tr><td id="00" onclick="MultiPlayer(this)"></td><td id="01" onclick="MultiPlayer(this)"></td><td id="02" onclick="MultiPlayer(this)"></td></tr>
 				<tr><td id="10" onclick="MultiPlayer(this)"></td><td id="11" onclick="MultiPlayer(this)"></td><td id="12" onclick="MultiPlayer(this)"></td></tr>

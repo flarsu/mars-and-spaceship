@@ -10,6 +10,7 @@ A tic-tac-toe game developed using JS.<br>
     - Selecting cahnce to play
     - Hints for best Move
     - Multiplayer(Game against )
+    - Moves undo button
   
 
 

@@ -76,6 +76,9 @@ body{
 	width:4em;
 	height: 4em;
 	border-radius: 2em;
+	background: #15645c;
+	border:none;
+	color:white;
 }
 
 .select-css {
@@ -147,4 +150,16 @@ body{
 
 .select-css:disabled:hover, .select-css[aria-disabled=true] {
     border-color: #aaa;
+}
+
+
+#undo{
+	float:right;
+	width:4em;
+	height: 4em;
+	border-radius: 2em;
+	position:relative;
+	background: #15645c;
+	border:none;
+	color:#04312d;
 }
