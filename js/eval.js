@@ -11,6 +11,8 @@ function setWally(){
 		button.style.display = 'block';
 		document.getElementById('name').innerHTML = "Jade";
 		document.getElementById('bnt-restart').style.display = 'block';	
+		var button_x = document.getElementById("undo");
+		button_x.style.display = 'block';
 	}
 	else{
 		document.getElementById("bSide").innerHTML = '<img src="./images/playerB.svg" style="height:80%;position:absolute">';
@@ -18,6 +20,8 @@ function setWally(){
 		button.style.display = 'none';
 		document.getElementById('name').innerHTML = "PlayerB";
 		document.getElementById('bnt-restart').value = 'Restart';
+		var button_x = document.getElementById("undo");
+		button_x.style.display = 'none';
 	}	
 }
 
