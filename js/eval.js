@@ -3,7 +3,6 @@ function initial()
 	document.getElementById("bSide").innerHTML = '<img src="./images/robot.png" style="height:80%;position:absolute">';
 }
 function setWally(){
-	console.log('hi');
 	let level = document.getElementById("level").value;
 	if(level == 'easy' || level == 'difficult')
 		{document.getElementById("bSide").innerHTML = '<img src="./images/robot.png" style="height:80%;position:absolute">';
