@@ -10,7 +10,7 @@ A tic-tac-toe game developed using JS.<br>
     - Game against Computer(Jade)
     - Selecting cahnce to play
     - Hints for best Move
-    - Multiplayer(Game against )
+    - Multiplayer(Game against Friend)
     - Moves undo button
   
 
