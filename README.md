@@ -8,7 +8,7 @@ A tic-tac-toe game developed using JS.<br>
 
 ## Features:
     - Game against Computer(Jade)
-    - Selecting cahnce to play
+    - Selecting chance to play
     - Hints for best Move
     - Multiplayer(Game against Friend)
     - Moves undo button
